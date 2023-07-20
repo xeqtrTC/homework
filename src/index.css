@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .label {
+        @apply text-[#727272] font-medium text-xl
+    }
+    .input {
+        @apply border  border-[#727272] rounded-md py-2 px-3 outline-none
+    }
+    .divCombined {
+        @apply flex flex-col space-y-2
+    }
+    .button {
+        @apply bg-black text-white font-medium p-2 rounded-md disabled:cursor-not-allowed
+    }
+    .smoothTransition {
+        @apply transition-all duration-200 ease-in-out
+    }
+    .productItemsDivs {
+        @apply flex items-center  space-x-2
+    }
+    .productItemIcons {
+        @apply w-6 h-6  text-red-500 hover:scale-110 smoothTransition hover:text-red-600 cursor-pointer
+    }
+}
