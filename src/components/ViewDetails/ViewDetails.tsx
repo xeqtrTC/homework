@@ -19,7 +19,6 @@ const ViewDetails = () => {
         setCurrentPhoto(newIndex)
       };  
     let content = null;
-    console.log(isError, error, isFetched)
     if (isLoading) {
         content = (
             <div className="h-screen flex justify-center items-center">
@@ -94,8 +93,6 @@ const ViewDetails = () => {
                 )
             )
         }
-    
-    console.log(data);
     return (
         <div className="h-full">
             {content}

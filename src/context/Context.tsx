@@ -35,7 +35,6 @@ const HomeworkContext = () => {
     const switchToProperPathname = (type: 'productName' | 'categoryName' ) => {
         dispatch({ type })
     }
-    console.log('sTATE, stae', state, productsOfCategoryData, allProductsData)
     useEffect(() => {
         if (pathname === 'categories') {
             switchToProperPathname('categoryName')
