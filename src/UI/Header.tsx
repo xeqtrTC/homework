@@ -56,7 +56,8 @@ const Header = () => {
                             />
                         ) : null
                     }
-                    <div>
+                    <div className='space-x-5'>
+                        <Link to='/' className='font-medium text-white'>Homepage</Link>
                         <Link to='/categories' className='font-medium text-white'>Categories</Link>
                     </div>
                 </div>
