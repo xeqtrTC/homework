@@ -9,6 +9,7 @@ export interface singleProductDetails {
     id?: number,
     images: string[],
     price: number,
+    message?: {message: string},
     rating?: number,
     stock?: number,
     thumbnail?: string,

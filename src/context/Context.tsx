@@ -26,19 +26,16 @@ const reducer = (state: typeof initStateReducer, action: actions): typeof initSt
     }
 }
 const HomeworkContext = () => {
-    const [error, setError] = useState<string>('');
     const [state, dispatch] = useReducer(reducer, initStateReducer)
     const [products, setProducts] = useState<singleProductDetails[]>([])
     const [pathname, setPathName] = useState<string>('');
     const [categoryValue, setCategoryValue] = useState<string>('');
-    const [allProducts, setAllProducts] = useState<boolean>(false);
-    const [productsOfCategory, setProductsOfCategory] = useState<boolean>(false);
-    const { data, isLoading, isError, error: errorAllProductsQuery, isSuccess } = getAllProductsQuery({ isTrue: state.productName});
-    const { data: productsOfCategoryData} = getProductsOfCategoryQuery({categoryValue, productsOfCategory: state.categoryName});
+    const { data: allProductsData, isLoading: allProductsIsLoading, isError, error: errorAllProducts, isSuccess: allProductsIsSuccess } = getAllProductsQuery({ isTrue: state.productName});
+    const { data: productsOfCategoryData, isLoading: productsOfCategoryIsLoading, isSuccess: productsOfCategoryIsSuccess } = getProductsOfCategoryQuery({categoryValue, productsOfCategory: state.categoryName});
     const switchToProperPathname = (type: 'productName' | 'categoryName' ) => {
         dispatch({ type })
     }
-    console.log('sTATE, stae', state, productsOfCategoryData, data)
+    console.log('sTATE, stae', state, productsOfCategoryData, allProductsData)
     useEffect(() => {
         if (pathname === 'categories') {
             switchToProperPathname('categoryName')
@@ -47,12 +44,12 @@ const HomeworkContext = () => {
         }
     }, [pathname])
     useEffect(() => {
-        if (data) {
-            setProducts(data)
-        } else if (productsOfCategory) {
+        if (state.productName) {
+            setProducts(allProductsData!)
+        } else if (state.categoryName) {
             setProducts(productsOfCategoryData!)
         }
-    }, [data, productsOfCategoryData])
+    }, [allProductsData, productsOfCategoryData, state.categoryName, state.productName])
 
     const addItems = (data: singleProductDetails[]) => {
         setProducts(data)
@@ -71,23 +68,36 @@ const HomeworkContext = () => {
         setProducts(remove);
     }
 
-    return { categoryValue, setCategoryValue, error, setError, products, isLoading, isError, errorAllProductsQuery, isSuccess, addItems, addProduct, updateProduct, deleteProduct, setPathName};
+    return { categoryValue, 
+        setCategoryValue, 
+        addItems,  
+        addProduct, 
+        updateProduct,
+        deleteProduct, 
+        setPathName,
+        products, 
+        allProductsIsLoading, 
+        allProductsIsSuccess, 
+        errorAllProducts, 
+        productsOfCategoryIsLoading,
+        productsOfCategoryIsSuccess
+        
+    };
 }
 
 export type UseContextType = ReturnType<typeof HomeworkContext>
 
 export const initState: UseContextType = {
-    error: '',
-    setError: () => {},
     addItems: () => {},
     addProduct: () => {},
     updateProduct: () => {},
     deleteProduct: () => {},
     products: [],
-    isError: false,
-    isLoading: false,
-    errorAllProductsQuery: false,
-    isSuccess: false,
+    allProductsIsLoading: false,
+    errorAllProducts: false,
+    allProductsIsSuccess: false,
+    productsOfCategoryIsSuccess: false,
+    productsOfCategoryIsLoading: false,
     setPathName: () => {},
     setCategoryValue: () => {}, 
     categoryValue: ''

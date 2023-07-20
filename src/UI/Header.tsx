@@ -3,7 +3,7 @@ import { AiOutlineSearch } from 'react-icons/ai'
 import { searchProductsQuery } from '../hooks/query';
 import SearchProductItem from './SearchProductItem';
 import LoadingSpinner from './LoadingSpinner';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Header = () => {
     const [inputOpen, setInputOpen] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>('');
@@ -56,6 +56,9 @@ const Header = () => {
                             />
                         ) : null
                     }
+                    <div>
+                        <Link to='/categories' className='font-medium text-white'>Categories</Link>
+                    </div>
                 </div>
                 {
                     searchValue.length > 2 ? (

@@ -8,7 +8,7 @@ import Button from "../../UI/Button";
 
 const initialCount = 9;
 const Homepage = () => {
-    const { products, isError, isLoading, isSuccess, setPathName } = UseItems();
+    const { products, allProductsIsLoading, allProductsIsSuccess, setPathName } = UseItems();
     useEffect(() => {
         setPathName('homepage')
     }, [])
@@ -16,17 +16,17 @@ const Homepage = () => {
     const divRef = useRef<HTMLDivElement>(null);
 
     let content = null;
-    if (isLoading) {
+    if (allProductsIsLoading) {
         content = (
             <div className="h-screen flex justify-center items-center">
                 <LoadingSpinner />
             </div>
         )
-    } else if (isSuccess && products?.length === 0) {
+    } else if (allProductsIsSuccess && products?.length === 0) {
         content = (
             <p>Nema produkata</p>
         )
-    } else if (isSuccess && products?.length! > 0) {
+    } else if (allProductsIsSuccess && products?.length! > 0) {
         const totalProducts = products?.length
         const loadMore = () => {
             const newDisplayCount = Math.min(displayCount + initialCount, totalProducts!);
@@ -36,7 +36,7 @@ const Homepage = () => {
         const displayedProducts = products?.slice(0, displayCount);
         content = (
             <div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 overflow-y-auto h-full" >
+                <div className="gridResponsive" >
                     {
                         displayedProducts?.map((item) => {
                             const { title, price, id, images} = item;
