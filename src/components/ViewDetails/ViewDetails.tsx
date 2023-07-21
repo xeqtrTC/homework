@@ -40,9 +40,6 @@ const ViewDetails = () => {
         } else (
             content = (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 border h-screen">
-                        {
-                            message ? `${message}`: null
-                        }
                         <div className='flex relative items-center justify-center bg-[#F7F7F7]/60'>
                             <div 
                             className="absolute top-50 left-9 md:left-1 lg:left-9 bg-black rounded-full text-white p-2 hover:scale-110 smoothTransition cursor-pointer"
