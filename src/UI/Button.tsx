@@ -7,7 +7,7 @@ const Button = ({ name, canBeAdded, isLoading, loadMore }: { name: string, canBe
             <button 
             className="button" 
             onClick={loadMore ? loadMore : undefined} 
-            disabled={canBeAdded ? !canBeAdded : false}>
+            disabled={canBeAdded === undefined ? false : !canBeAdded ? true : false }>
                 { isLoading ? <ImSpinner10 className="w-6 animate-spin h-6 text-center text-blue-600" /> : name}
             </button>
         </div>

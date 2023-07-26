@@ -3,6 +3,8 @@ import EditInputs from "../../UI/EditInputs"
 import { editProductDetails } from "../../hooks/interfaces"
 import { addProductMutation } from "../../hooks/mutations"
 import Button from "../../UI/Button"
+import { useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 
 const AddProduct = () => {
     const [addInputs, setAddInputs] = useState<editProductDetails>({
@@ -10,6 +12,7 @@ const AddProduct = () => {
         price: null,
         description: ''
     })
+    const navigate = useNavigate();
     const changeValueOfInputs = (e: FormEvent<HTMLInputElement>) => {
         const name = e.currentTarget.name;
         const value = e.currentTarget.value;
@@ -17,9 +20,15 @@ const AddProduct = () => {
     }
     const canBeAdded = [addInputs.description, addInputs.price, addInputs.title].every(Boolean);
     const { mutate, isLoading} = addProductMutation( setAddInputs );
+    console.log(canBeAdded);
     const addProductFn = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        mutate(addInputs)
+        try {
+            mutate(addInputs)
+            navigate('/')
+        } catch (error: any) {
+            toast.error('Error!')
+        }
     }
     return (
         <div className="flex justify-center items-center h-screen">
