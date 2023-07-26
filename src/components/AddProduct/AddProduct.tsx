@@ -20,7 +20,6 @@ const AddProduct = () => {
     }
     const canBeAdded = [addInputs.description, addInputs.price, addInputs.title].every(Boolean);
     const { mutate, isLoading} = addProductMutation( setAddInputs );
-    console.log(canBeAdded);
     const addProductFn = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
